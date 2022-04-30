@@ -1,19 +1,6 @@
 #include <iostream>
 #include <type_traits>
-
-
-namespace exo 
-{
-    template<typename T>
-    struct remove_reference { using type = T; };
-
-    template<typename T>
-    struct remove_reference<T&> { using type = T; };
-
-    template <typename T>
-    struct remove_reference<T&&> { using type = T; };
-}
-
+#include "type_traits_impl.h"
 
 int main() 
 {   
