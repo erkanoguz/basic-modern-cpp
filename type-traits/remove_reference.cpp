@@ -2,6 +2,9 @@
 #include <type_traits>
 #include "type_traits_impl.h"
 
+
+struct A {};
+
 int main() 
 {   
     std::cout << std::boolalpha;
