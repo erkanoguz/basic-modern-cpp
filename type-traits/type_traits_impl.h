@@ -7,6 +7,9 @@ namespace exo {
     template<typename T> struct remove_reference<T&> { using type = T; };
     template <typename T> struct remove_reference<T&&> { using type = T; };
 
+    template <typename T> 
+    using remove_reference_t = typename remove_reference<T>::type;
+
     template<typename T>
     typename remove_reference<T>::type&& move(T&& arg)
     {
@@ -15,6 +18,9 @@ namespace exo {
 
     template <bool B, typename T, typename F> struct conditional { using type = T; };
     template <typename T, typename F> struct conditional<false, T, F>  { using type = F; }; 
+    
+    template <bool B, typename T, typename F>
+    using conditional_t = typename conditional<B,T,F>::type;
 }
 
 
