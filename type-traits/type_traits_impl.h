@@ -3,6 +3,19 @@
 
 namespace exo {
 
+    struct false_type 
+    {
+        static constexpr bool value = false;
+        constexpr operator bool() const noexcept { return value; }
+    };
+
+    struct true_type 
+    {
+        static constexpr bool value = true;
+        constexpr operator bool() const noexcept { return value; }
+    };
+
+
     template<typename T> struct remove_reference { using type = T; };
     template<typename T> struct remove_reference<T&> { using type = T; };
     template <typename T> struct remove_reference<T&&> { using type = T; };
@@ -21,6 +34,11 @@ namespace exo {
     
     template <bool B, typename T, typename F>
     using conditional_t = typename conditional<B,T,F>::type;
+
+    template <typename T> struct is_rvalue_reference : false_type {};
+    template <typename T> struct is_rvalue_reference<T&&> : true_type {};
+    template <typename T> 
+    constexpr bool is_rvalue_reference_v = is_rvalue_reference<T>::value;
 }
 
 
