@@ -17,6 +17,7 @@ namespace exo {
     using false_type = bool_constant<false>;
     using true_type = bool_constant<true>;
 
+
     template<typename T> struct remove_reference { using type = T; };
     template<typename T> struct remove_reference<T&> { using type = T; };
     template <typename T> struct remove_reference<T&&> { using type = T; };
