@@ -22,3 +22,12 @@ TEST_F(TypeTraitsTest, TypeTraits_isArray)
     constexpr bool exoArray = exo::is_array<std::array<int, 3>>::value;
     EXPECT_EQ(stdArray, exoArray);
 }
+
+TEST_F(TypeTraitsTest, TypeTraits_isPointer)
+{
+    EXPECT_FALSE(exo::is_pointer<A>::value);
+    EXPECT_FALSE(exo::is_pointer_v<A>);
+    EXPECT_EQ(std::is_pointer<A*>::value, exo::is_pointer<A*>::value);
+    EXPECT_EQ(std::is_pointer<A const*>::value, exo::is_pointer<A const*>::value);
+    EXPECT_TRUE(exo::is_pointer_v<A*>);
+}
