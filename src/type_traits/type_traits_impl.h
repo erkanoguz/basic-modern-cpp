@@ -53,6 +53,18 @@ namespace exo {
     
     template<typename T>
     inline constexpr bool is_pointer_v = is_pointer<T>::value;
+
+    template <typename T>
+    struct is_array : false_type{};
+
+    template <typename T>
+    struct is_array<T[]> : true_type{};
+
+    template <typename T, std::size_t N>
+    struct is_array<T[N]> : true_type{};
+
+    template <typename T>
+    constexpr bool is_array_v = is_array<T>::value;
 }
 
 
