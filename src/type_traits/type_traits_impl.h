@@ -41,7 +41,7 @@ namespace exo {
     template <typename T> struct is_rvalue_reference<T&&> : true_type {};
     template <typename T> 
     constexpr bool is_rvalue_reference_v = is_rvalue_reference<T>::value;
-    
+
     template <typename T>
     struct is_array : false_type{};
 
@@ -53,7 +53,6 @@ namespace exo {
 
     template <typename T>
     constexpr bool is_array_v = is_array<T>::value;
-
 
     template<typename T>
     struct is_pointer : false_type {};
@@ -72,6 +71,25 @@ namespace exo {
 
     template <typename T>
     constexpr bool is_pointer_v = is_pointer<T>::value;
+
+    template <typename T, typename U>
+    struct is_same : false_type {};
+
+    template <typename T>
+    struct is_same<T, T> : true_type {};
+
+    template <typename T, typename U>
+    constexpr bool is_same_v = is_same<T, U>::value;
+
+    template <bool B, typename T = void>
+    struct enable_if{};
+
+    template <typename T>
+    struct enable_if<true, T> {using type = T;};
+
+    template <bool B, typename T>
+    using is_enable_if_t = typename enable_if<B, T>::type;
+    
 }
 
 

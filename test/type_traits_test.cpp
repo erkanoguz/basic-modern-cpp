@@ -3,6 +3,7 @@
 
 #include <type_traits>
 #include <array>
+#include <memory>
 
 class TypeTraitsTest : public ::testing::Test
 {};
@@ -30,4 +31,20 @@ TEST_F(TypeTraitsTest, TypeTraits_isPointer)
     EXPECT_EQ(std::is_pointer<A*>::value, exo::is_pointer<A*>::value);
     EXPECT_EQ(std::is_pointer<A const*>::value, exo::is_pointer<A const*>::value);
     EXPECT_TRUE(exo::is_pointer_v<A*>);
+}
+
+TEST_F(TypeTraitsTest, TypeTraits_isSame)
+{
+    auto stdIsSame = std::is_same<int, uint32_t>::value;
+    auto exoIsSame = exo::is_same<int, uint32_t>::value;
+    auto trueIsSame = exo::is_same<A, A>::value;
+    auto constIsSame = exo::is_same<const int, int>::value;
+    std::unique_ptr<const int> cv{new int(10)};
+    std::unique_ptr<int> v{new int(10)};
+    auto up = exo::is_same_v<decltype(cv), decltype(v)>;
+
+    EXPECT_EQ(stdIsSame, exoIsSame);
+    EXPECT_TRUE(trueIsSame);
+    EXPECT_FALSE(constIsSame);
+    EXPECT_FALSE(up);
 }
