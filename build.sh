@@ -12,5 +12,5 @@ else
 fi
 
 conan install ${CONAN_DIR}
-cmake .. -DCMAKE_BUILD_TYPE=test
+cmake .. -DCMAKE_BUILD_TYPE=RELEASE
 cmake --build .
