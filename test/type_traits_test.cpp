@@ -48,3 +48,15 @@ TEST_F(TypeTraitsTest, TypeTraits_isSame)
     EXPECT_FALSE(constIsSame);
     EXPECT_FALSE(up);
 }
+
+TEST_F(TypeTraitsTest, TypeTraits_conditinal) 
+{
+    typedef std::conditional<true, int, double>::type TypeS;
+    typedef exo::conditional<true, int, double>::type TypeE;
+
+    typedef std::conditional<false, int, double>::type TypeS1;
+    typedef exo::conditional<false, int, double>::type TypeE1;
+
+    EXPECT_EQ(typeid(TypeE).name(), typeid(TypeS).name());
+    EXPECT_EQ(typeid(TypeE1).name(), typeid(TypeS1).name());
+}
